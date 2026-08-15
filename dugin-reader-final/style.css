@@ -173,3 +173,31 @@ footer{max-width:38em; margin:0 auto;}
   #topbar .tb-title{display:none;}
   main{padding-top:4.5rem;}
 }
+
+/* ---------- e-ink mode (Boox/Daylight): max contrast, no motion, no fixed layers ---------- */
+html[data-theme="eink"]{
+  --paper:#ffffff; --ink:#000000; --porphyry:#000000; --gold:#1a1a1a;
+  --faded:#222222; --rule:#000000; --raise:#ffffff;
+  scroll-behavior:auto;
+}
+html[data-theme="eink"] *{transition:none !important; animation:none !important;
+  box-shadow:none !important; text-shadow:none !important;}
+html[data-theme="eink"] body{font-weight:500; font-size:1.36rem; line-height:1.7;
+  -webkit-font-smoothing:auto;}
+html[data-theme="eink"] #topbar{position:static; background:var(--paper);
+  backdrop-filter:none; border-bottom:2px solid #000;}
+html[data-theme="eink"] main{padding-top:1.6rem;}
+html[data-theme="eink"] #topbar button{border:1.5px solid #000; background:#fff; color:#000;}
+html[data-theme="eink"] .rail-inner{position:static; max-height:none; overflow:visible;
+  border-left:2px solid #000;}
+html[data-theme="eink"] .rail{color:#111;}
+html[data-theme="eink"] .rail strong{color:#000;}
+html[data-theme="eink"] a{color:#000; text-decoration:underline;}
+html[data-theme="eink"] sup.src{color:#000; font-weight:600;}
+html[data-theme="eink"] ::selection{background:#000; color:#fff;}
+html[data-theme="eink"] .group.missing .gap{border:1.5px dashed #000;}
+/* browsers that self-report monochrome get the same palette automatically */
+@media (monochrome){
+  :root{--paper:#ffffff; --ink:#000000; --porphyry:#000000; --gold:#1a1a1a;
+    --faded:#222222; --rule:#000000; --raise:#ffffff;}
+}
