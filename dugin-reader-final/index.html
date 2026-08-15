@@ -1826,6 +1826,7 @@
 (function(){
   var root=document.documentElement, KEY='dugin-reader';
   var st={}; try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+  if(/[?&]eink/.test(location.search)){st.theme='eink';}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
   function applyTheme(){root.setAttribute('data-theme',st.theme||'auto');
     document.getElementById('theme-btn').textContent='Theme: '+(st.theme||'auto');}
@@ -1840,6 +1841,7 @@
   document.getElementById('toc-close').onclick=function(){openToc(false)};
   scrim.onclick=function(){openToc(false)};
   toc.addEventListener('click',function(e){if(e.target.tagName==='A')openToc(false)});
+  if(/[?&]eink/.test(location.search)){save();}
   applyTheme();applyFocus();
 })();
 </script>
