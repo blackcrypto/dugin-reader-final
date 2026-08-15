@@ -1832,7 +1832,7 @@
   function applyFocus(){document.body.classList.toggle('focus',!!st.focus);
     document.getElementById('focus-btn').textContent=st.focus?'Show apparatus':'Focus';}
   document.getElementById('theme-btn').onclick=function(){
-    st.theme={auto:'light',light:'dark',dark:'auto'}[st.theme||'auto'];save();applyTheme();};
+    st.theme={auto:'light',light:'dark',dark:'eink',eink:'auto'}[st.theme||'auto'];save();applyTheme();};
   document.getElementById('focus-btn').onclick=function(){st.focus=!st.focus;save();applyFocus();};
   var toc=document.getElementById('toc'),scrim=document.getElementById('scrim');
   function openToc(o){toc.classList.toggle('open',o);scrim.classList.toggle('show',o);}
