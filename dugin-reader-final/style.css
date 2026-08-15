@@ -1,0 +1,175 @@
+/* The Metaphysics of the Good News — reader edition.
+   Tokens from the instalment design system: parchment / ink / porphyry / gold. */
+
+:root{
+  --paper:#f5efe2; --ink:#211c15; --porphyry:#6e1423; --gold:#8a6a25;
+  --faded:#7a6f5d; --rule:#d8cdb6; --raise:#fbf7ee;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#171310; --ink:#e4dbc9; --porphyry:#c96a5d; --gold:#c2a35a;
+    --faded:#8f8471; --rule:#372f25; --raise:#1e1914;
+  }
+}
+html[data-theme="light"]{
+  --paper:#f5efe2; --ink:#211c15; --porphyry:#6e1423; --gold:#8a6a25;
+  --faded:#7a6f5d; --rule:#d8cdb6; --raise:#fbf7ee;
+}
+html[data-theme="dark"]{
+  --paper:#171310; --ink:#e4dbc9; --porphyry:#c96a5d; --gold:#c2a35a;
+  --faded:#8f8471; --rule:#372f25; --raise:#1e1914;
+}
+
+html{background:var(--paper); scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+body{
+  margin:0; color:var(--ink);
+  font-family:"EB Garamond", Georgia, "Times New Roman", serif;
+  font-size:1.22rem; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+main{padding:5.5rem 1.4rem 6rem;}
+::selection{background:var(--porphyry); color:var(--paper);}
+a{color:var(--porphyry);}
+
+/* ---------- top bar ---------- */
+#topbar{
+  position:fixed; inset:0 0 auto 0; z-index:30; display:flex; align-items:center;
+  gap:1rem; padding:.5rem 1rem;
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(6px); border-bottom:1px solid var(--rule);
+  font-size:.92rem;
+}
+#topbar .tb-title{
+  font-family:"Cormorant SC","EB Garamond",serif; letter-spacing:.14em;
+  color:var(--faded); flex:1; text-align:center; text-transform:uppercase;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+#topbar .tb-tools{display:flex; gap:.5rem;}
+#topbar button{
+  font:inherit; font-size:.86rem; letter-spacing:.06em; cursor:pointer;
+  color:var(--ink); background:var(--raise); border:1px solid var(--rule);
+  border-radius:2px; padding:.28rem .7rem;
+}
+#topbar button:hover{border-color:var(--gold);}
+#topbar button:focus-visible, #toc a:focus-visible{
+  outline:2px solid var(--gold); outline-offset:2px;
+}
+
+/* ---------- table of contents drawer ---------- */
+#toc{
+  position:fixed; top:0; bottom:0; left:0; width:min(24rem,88vw); z-index:40;
+  background:var(--raise); border-right:1px solid var(--rule);
+  transform:translateX(-102%); transition:transform .25s ease;
+  overflow-y:auto; padding:1rem 1.2rem 2rem; font-size:.98rem;
+}
+@media (prefers-reduced-motion: reduce){ #toc{transition:none;} }
+#toc.open{transform:none;}
+#toc .toc-head{
+  display:flex; justify-content:space-between; align-items:center;
+  font-family:"Cormorant SC","EB Garamond",serif; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:.8rem;
+}
+#toc-close{font:inherit; font-size:1.3rem; background:none; border:none;
+  color:var(--faded); cursor:pointer; line-height:1;}
+#toc ol{list-style:none; margin:0; padding:0;}
+#toc li{margin:.18rem 0;}
+#toc li.toc-part{
+  font-family:"Cormorant SC","EB Garamond",serif; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--porphyry); font-size:.86rem;
+  margin:1rem 0 .3rem;
+}
+#toc li.toc-gap a{color:var(--faded); font-style:italic;}
+#toc a{color:var(--ink); text-decoration:none;}
+#toc a:hover{color:var(--porphyry);}
+#scrim{position:fixed; inset:0; z-index:35; background:rgba(0,0,0,.28);
+  opacity:0; pointer-events:none; transition:opacity .25s;}
+#scrim.show{opacity:1; pointer-events:auto;}
+
+/* ---------- book front matter ---------- */
+header.book{text-align:center; max-width:38em; margin:0 auto 4.5rem;}
+.book .author{font-family:"Cormorant SC","EB Garamond",serif; letter-spacing:.32em;
+  font-size:.95rem; color:var(--faded); text-transform:uppercase; margin:0 0 1.1rem;}
+.book h1{font-family:"Cormorant SC","EB Garamond",serif; font-weight:600;
+  font-size:2.5rem; line-height:1.14; margin:.1rem 0 .4rem; letter-spacing:.02em;}
+.book .subtitle{font-style:italic; font-size:1.15rem; margin:.2rem 0 1.4rem;}
+.book .imprint{font-size:.95rem; color:var(--faded); margin:.15rem 0;}
+.book .ed-note{margin:2.4rem auto 0; max-width:34em; font-size:.96rem;
+  color:var(--faded); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  padding:.9rem 1rem; text-align:justify; hyphens:auto;}
+
+/* ---------- part lines ---------- */
+.partline{
+  font-family:"Cormorant SC","EB Garamond",serif; text-align:center;
+  font-size:1.3rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--porphyry); margin:5.5rem auto 1rem; max-width:38em;
+  scroll-margin-top:5rem;
+}
+.partline .prov{font-size:.75rem; letter-spacing:.1em; color:var(--faded);}
+
+/* ---------- chapter groups: main column + apparatus rail ---------- */
+.group{
+  display:grid; grid-template-columns:minmax(0,38em) minmax(15rem,20rem);
+  gap:0 3.2rem; justify-content:center; margin:0 auto 2rem; max-width:72rem;
+  align-items:start;
+}
+.group .main{min-width:0;}
+.chapter{margin-top:4.2rem; scroll-margin-top:5rem;}
+.chapter:first-child{margin-top:2.2rem;}
+.chapter .eyebrow{font-family:"Cormorant SC","EB Garamond",serif; text-align:center;
+  color:var(--gold); letter-spacing:.26em; font-size:.92rem; text-transform:uppercase;
+  margin:0 0 .6rem;}
+.chapter h2{font-family:"Cormorant SC","EB Garamond",serif; font-weight:600;
+  text-align:center; font-size:1.72rem; line-height:1.22; margin:0 0 .5rem;
+  letter-spacing:.015em;}
+.chapter .ru-title{text-align:center; font-style:italic; color:var(--faded);
+  font-size:1.02rem; margin:0 0 2.2rem;}
+.chapter p{margin:0 0 1.15rem; text-align:justify; hyphens:auto;}
+.chapter p.first::first-letter{
+  font-family:"Cormorant SC","EB Garamond",serif; float:left; font-size:3.4em;
+  line-height:.82; padding:.04em .08em 0 0; color:var(--porphyry); font-weight:600;}
+sup.src{color:var(--gold); font-size:.68em; font-weight:500; letter-spacing:.02em;}
+blockquote{margin:1.4rem 0 1.4rem .2rem; padding:.15rem 0 .15rem 1.1rem;
+  border-left:3px solid var(--porphyry); font-style:italic;}
+.divider{text-align:center; color:var(--gold); margin:3.6rem 0; letter-spacing:.6em;
+  font-size:1rem;}
+
+/* ---------- apparatus rail (Tufte margin) ---------- */
+.rail{font-size:.9rem; line-height:1.5; color:var(--faded);}
+.rail-inner{
+  position:sticky; top:4.6rem; max-height:calc(100vh - 5.6rem); overflow-y:auto;
+  border-left:1px solid var(--rule); padding:1.4rem 0 1.4rem 1.4rem;
+  scrollbar-width:thin;
+}
+.rail h3{font-family:"Cormorant SC","EB Garamond",serif; font-size:.92rem;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin:0 0 .8rem;}
+.rail p{margin:0 0 .85rem; text-align:left; hyphens:auto;}
+.rail strong{color:var(--ink); font-weight:600;}
+
+/* ---------- missing-instalment placeholders ---------- */
+.group.missing .gap{
+  border:1px dashed var(--rule); border-radius:2px; padding:1.2rem 1.4rem;
+  font-size:.98rem; font-style:italic; color:var(--faded); margin-top:1rem;
+}
+.group.missing{grid-template-columns:minmax(0,38em); scroll-margin-top:5rem;}
+
+/* ---------- focus mode ---------- */
+body.focus .rail{display:none;}
+body.focus .group{grid-template-columns:minmax(0,38em);}
+
+/* ---------- footer ---------- */
+footer{max-width:38em; margin:0 auto;}
+.colophon{text-align:center; font-size:.9rem; color:var(--faded);
+  font-style:italic; margin-bottom:2rem;}
+
+/* ---------- narrow screens: rail collapses under its group ---------- */
+@media (max-width: 1080px){
+  .group{grid-template-columns:minmax(0,38em);}
+  .rail-inner{position:static; max-height:none; overflow:visible;
+    border-left:none; border-top:1px solid var(--rule);
+    padding:1.4rem 0 0; margin-top:3rem;}
+}
+@media (max-width: 560px){
+  body{font-size:1.12rem;}
+  #topbar .tb-title{display:none;}
+  main{padding-top:4.5rem;}
+}
