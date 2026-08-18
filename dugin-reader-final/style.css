@@ -210,7 +210,9 @@ html[data-theme="paper"] #topbar{border-bottom:2px solid #000; backdrop-filter:n
   background:var(--paper);}
 html[data-theme="paper"] #topbar button{border:1.5px solid #000; background:#fff; color:#000;}
 html[data-theme="paper"] .group.missing .gap{border:1.5px dashed #000;}
-html[data-theme="paper"] body{font-weight:500;}
+html[data-theme="paper"] body{font-weight:500; font-size:1.5rem; line-height:1.72;}
+html[data-theme="paper"] .rail{font-size:1.12rem;}
+html[data-theme="paper"] .chapter h2{font-size:1.9rem;}
 /* paper (Daylight DC-1): same monochrome contrast as eink, but transitions, smooth
    scroll, the fixed topbar and the sticky apparatus rail all remain — a 60fps
    reflective LCD pays no refresh penalty for them. */
