@@ -1827,13 +1827,14 @@
   var root=document.documentElement, KEY='dugin-reader';
   var st={}; try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
   if(/[?&]eink/.test(location.search)){st.theme='eink';}
+  if(/[?&]paper/.test(location.search)){st.theme='paper';}
   function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
   function applyTheme(){root.setAttribute('data-theme',st.theme||'auto');
     document.getElementById('theme-btn').textContent='Theme: '+(st.theme||'auto');}
   function applyFocus(){document.body.classList.toggle('focus',!!st.focus);
     document.getElementById('focus-btn').textContent=st.focus?'Show apparatus':'Focus';}
   document.getElementById('theme-btn').onclick=function(){
-    st.theme={auto:'light',light:'dark',dark:'eink',eink:'auto'}[st.theme||'auto'];save();applyTheme();};
+    st.theme={auto:'light',light:'dark',dark:'eink',eink:'paper',paper:'auto'}[st.theme||'auto'];save();applyTheme();};
   document.getElementById('focus-btn').onclick=function(){st.focus=!st.focus;save();applyFocus();};
   var toc=document.getElementById('toc'),scrim=document.getElementById('scrim');
   function openToc(o){toc.classList.toggle('open',o);scrim.classList.toggle('show',o);}
@@ -1841,7 +1842,7 @@
   document.getElementById('toc-close').onclick=function(){openToc(false)};
   scrim.onclick=function(){openToc(false)};
   toc.addEventListener('click',function(e){if(e.target.tagName==='A')openToc(false)});
-  if(/[?&]eink/.test(location.search)){save();}
+  if(/[?&](eink|paper)/.test(location.search)){save();}
   applyTheme();applyFocus();
 })();
 </script>
