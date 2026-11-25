@@ -1,0 +1,3 @@
+.DS_Store
+# font sources for build_epub.py: fetched once, not committed (see FONT_GET in the script)
+fonts-src/
