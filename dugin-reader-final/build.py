@@ -229,6 +229,7 @@ page = f"""<!DOCTYPE html>
   <p class="subtitle">(Orthodox Esotericism)</p>
   <p class="imprint">Moscow: Arktogeia, 1996 · Volume II of the “Absolute Homeland” cycle</p>
   <p class="imprint">Translated from the Russian · Reader edition, assembled 14 August 2026</p>
+  <p class="download">Also as an EPUB 3 file: <a href="metaphysics-of-the-good-news.epub">metaphysics-of-the-good-news.epub</a></p>
   <p class="ed-note">A literary translation with a critical apparatus. Dugin’s note markers
   (<sup class="src">n</sup>) are preserved in the text; the notes’ contents are not reproduced
   in this edition. The apparatus beside each chapter group records translator decisions and
@@ -243,13 +244,15 @@ page = f"""<!DOCTYPE html>
 (function(){{
   var root=document.documentElement, KEY='dugin-reader';
   var st={{}}; try{{st=JSON.parse(localStorage.getItem(KEY)||'{{}}')}}catch(e){{}}
+  if(/[?&]eink/.test(location.search)){{st.theme='eink';}}
+  if(/[?&]paper/.test(location.search)){{st.theme='paper';}}
   function save(){{try{{localStorage.setItem(KEY,JSON.stringify(st))}}catch(e){{}}}}
   function applyTheme(){{root.setAttribute('data-theme',st.theme||'auto');
     document.getElementById('theme-btn').textContent='Theme: '+(st.theme||'auto');}}
   function applyFocus(){{document.body.classList.toggle('focus',!!st.focus);
     document.getElementById('focus-btn').textContent=st.focus?'Show apparatus':'Focus';}}
   document.getElementById('theme-btn').onclick=function(){{
-    st.theme={{auto:'light',light:'dark',dark:'auto'}}[st.theme||'auto'];save();applyTheme();}};
+    st.theme={{auto:'light',light:'dark',dark:'eink',eink:'paper',paper:'auto'}}[st.theme||'auto'];save();applyTheme();}};
   document.getElementById('focus-btn').onclick=function(){{st.focus=!st.focus;save();applyFocus();}};
   var toc=document.getElementById('toc'),scrim=document.getElementById('scrim');
   function openToc(o){{toc.classList.toggle('open',o);scrim.classList.toggle('show',o);}}
@@ -257,6 +260,7 @@ page = f"""<!DOCTYPE html>
   document.getElementById('toc-close').onclick=function(){{openToc(false)}};
   scrim.onclick=function(){{openToc(false)}};
   toc.addEventListener('click',function(e){{if(e.target.tagName==='A')openToc(false)}});
+  if(/[?&](eink|paper)/.test(location.search)){{save();}}
   applyTheme();applyFocus();
 }})();
 </script>
