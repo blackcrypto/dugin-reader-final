@@ -233,7 +233,7 @@ page = f"""<!DOCTYPE html>
   (<sup class="src">n</sup>) are preserved in the text; the notes’ contents are not reproduced
   in this edition. The apparatus beside each chapter group records translator decisions and
   the author’s factual errors, which are rendered as written and flagged rather than silently
-  corrected. Two instalments (Chapters XIV–XVII and XXVI–XXVII) are pending and marked in place.</p>
+  corrected.</p>
 </header>
 {chr(10).join(groups_html)}
 <footer><p class="divider">✛ ✛ ✛</p>
